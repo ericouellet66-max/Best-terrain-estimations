@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "B.E.S.T. Terrain – Estimations",
+  "short_name": "B.E.S.T. Estim.",
+  "lang": "fr-CA",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#183e2b",
+  "background_color": "#f2f5f1",
+  "icons": [
+    {
+      "src": "./assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
