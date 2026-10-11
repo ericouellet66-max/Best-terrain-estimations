@@ -71,7 +71,7 @@ const rateGroups=[
 ];
 const rateFields=rateGroups.flatMap(g=>g[1]);
 let lastAppliedDescription='';
-function hasPendingDescription(){return $('description').value.trim()!==lastAppliedDescription}
+function hasPendingDescription(){const text=$('description').value.trim();return text!==''&&text!==lastAppliedDescription}
 let reviewState={exc:{mentioned:false,decided:false},park:{mentioned:false,decided:false},trench:{mentioned:false,decided:false}};
 const geoCheckbox={exc:'fabric',park:'pk_usefabric',trench:'t_usefabric'};
 function prepareRequestedOptions(target,text){
