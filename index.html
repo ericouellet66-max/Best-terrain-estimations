@@ -264,7 +264,7 @@ function parseRequestedDescription(){
  showTab(target,document.querySelectorAll('.tabs button')[['exc','park','trench','sol','hydro'].indexOf(target)]);
  if(target==='park'||target==='trench'){
   if(!(l>0&&w>0)&&!(target==='park'&&area&&Number(area[1])>0)){voiceMessage('⚠️ '+estimateNames[target]+' : précise la longueur et la largeur, par exemple « 18 par 30 pieds ». Aucun nouveau calcul effectué.');return false;}
-  prepareRequestedOptions(target,t);applySpokenJobSettings(target,t);
+  prepareRequestedOptions(target,t);reviewState[target].depthMentioned=!!depth;applySpokenJobSettings(target,t);
   if(target==='park'){$('pk_area_override').value=(l>0&&w>0)?'':Number(area[1]);$('pk_l').value=l??'';$('pk_w').value=w??'';if(depth)$('pk_d').value=inches(depth);calcPark();}
   else{$('t_l').value=l;$('t_w').value=w*12;if(depth)$('t_d').value=inches(depth);calcTrench();}
  }else{
@@ -318,6 +318,7 @@ function parseExcavation(){
  $('exc_area_override').value=zones.length?'':Number(surface[1]);$('length').value=zones.length?zones[0].l:'';$('width').value=zones.length?zones[0].w:'';
  // La profondeur d'excavation se trouve après la dernière dimension, pas dans ses mesures.
  const ex=t.match(/(?:profondeur|excavation)\s*(?:de|:)?\s*(\d+(?:\.\d+)?)\s*(pouces?|po\b|pieds?|pi\b)/) || t.match(/(?:excav\w*|creus\w*)[^.;\n]{0,110}?\b(?:de|sur|profond(?:eur)?(?: de)?)\s*(\d+(?:\.\d+)?)\s*(pouces?|po\b|pieds?|pi\b)/) || t.match(/(?:excav\w*|creus\w*)[^.;\n]{0,110}?(\d+(?:\.\d+)?)\s*(pouces?|po\b|pieds?|pi\b)\s*(?:de\s+)?profond/);
+ reviewState.exc.depthMentioned=!!ex;
  if(ex)$('depth').value=Number(ex[1])*(ex[2].startsWith('pi')?12:1);
  // Cherche la quantité la plus proche de chaque matériau, sans capturer celle du matériau précédent.
  const thickness=(material)=>{
